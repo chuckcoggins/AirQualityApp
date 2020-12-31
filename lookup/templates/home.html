@@ -2,6 +2,19 @@
 
 {% block content %}
 
-<h1>Hello World!</h1>
+<h2>What is the Air like Today?</h2>
+<br/>
+Raw Data before Parse: <br/><br/>
+
+{{ api.0 }}<br/><br/>
+
+<br/>
+Air Quality Check after Parse:
+<br/><br/><br/>
+
+Area: {{ api.0.ReportingArea }}, {{ api.0.StateCode }}<br/>
+Coordinates: Latitude:{{ api.0.Latitude }} Longitude:{{ api.0.Longitude }}<br/>
+Air Quality: {{ api.0.AQI }}, Air Quality = {{ api.0.Category.Name }}<br/>
+
 
 {% endblock %}
