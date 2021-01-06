@@ -2,19 +2,28 @@
 
 {% block content %}
 
-<h2>What is the Air like Today?</h2>
 <br/>
-Raw Data before Parse: <br/><br/>
-
-{{ api.0 }}<br/><br/>
-
 <br/>
-Air Quality Check after Parse:
-<br/><br/><br/>
 
-Area: {{ api.0.ReportingArea }}, {{ api.0.StateCode }}<br/>
-Coordinates: Latitude:{{ api.0.Latitude }} Longitude:{{ api.0.Longitude }}<br/>
-Air Quality: {{ api.0.AQI }}, Air Quality = {{ api.0.Category.Name }}<br/>
+{% if zipcode %}
+    {{ zipcode }}
+{% endif %}
 
+{% if api %}
+    {% if api == "Error..." %}
+        There was an error, please try again.
+    {% else %}
+
+<div class="jumbotron {{ category_color }}">
+    <h1 class="display-4">{{ api.1.Category.Name }}</h1>
+    <p class="lead"><b>Location</b>:   {{ api.1.ReportingArea }}, {{ api.1.StateCode }}</p>
+    <p class="lead"><b>Current Air Quality</b>:  {{ api.1.AQI }}</p>
+    <p class="lead"><b>Coordinates</b>:   Latitude: {{ api.1.Latitude }}  Longitude: {{ api.1.Longitude }}</p>
+    <p>{{ category_description }}</p>
+</div>
+
+    {% endif %}
+
+{% endif %}
 
 {% endblock %}
